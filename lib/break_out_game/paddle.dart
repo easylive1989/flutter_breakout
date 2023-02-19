@@ -9,7 +9,7 @@ enum PaddleState {
 }
 
 class Paddle extends RectangleComponent
-    with KeyboardHandler, HasGameRef<BreakOutGame> {
+    with KeyboardHandler, HasGameRef<BreakoutGame> {
   Paddle(Vector2 gameSize)
       : _velocity = gameSize.x / 3,
         super(

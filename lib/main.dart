@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: GameWidget(
-        game: BreakOutGame(),
+        game: BreakoutGame(),
       ),
     );
   }
