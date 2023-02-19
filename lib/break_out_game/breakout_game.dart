@@ -1,14 +1,10 @@
 import 'dart:async';
 
-import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_breakout/break_out_game/arena.dart';
 import 'package:flutter_breakout/break_out_game/ball.dart';
-import 'package:flutter_breakout/break_out_game/brick_generator.dart';
 import 'package:flutter_breakout/break_out_game/brick_wall.dart';
-import 'package:flutter_breakout/break_out_game/paddle.dart';
 
 class BreakoutGame extends Forge2DGame with HasKeyboardHandlerComponents {
   @override
