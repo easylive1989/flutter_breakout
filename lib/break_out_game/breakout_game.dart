@@ -1,26 +1,33 @@
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:flame/events.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flutter_breakout/break_out_game/arena.dart';
 import 'package:flutter_breakout/break_out_game/ball.dart';
 import 'package:flutter_breakout/break_out_game/brick_wall.dart';
+import 'package:flutter_breakout/break_out_game/paddle.dart';
 
 class BreakoutGame extends Forge2DGame with HasKeyboardHandlerComponents {
   @override
-  FutureOr<void> onLoad() {
+  FutureOr<void> onLoad() async {
     super.onLoad();
 
-    // add(Paddle(size));
-    add(BrickWall(
+    await add(BrickWall(
       position: Vector2(0.0, size.y * 0.075),
       rows: 8,
       columns: 6,
     ));
-    add(Arena());
-    add(Ball(
+    await add(Arena());
+    var ball = Ball(
       radius: 1.0,
       position: size / 2,
+    );
+    await add(ball);
+    ball.body.applyLinearImpulse(Vector2(-10, -10));
+    await add(Paddle(
+      position: Vector2(size.x / 2.0, size.y * 0.85),
+      size: const Size(4, 0.8),
     ));
   }
 }

@@ -30,6 +30,7 @@ class Brick extends BodyComponent<BreakoutGame> {
       );
 
     brickBody.createFixture(
+      // TODO
       FixtureDef(shape)
         ..density = 100.0
         ..friction = 0.0
