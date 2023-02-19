@@ -17,7 +17,9 @@ class Ball extends BodyComponent<BreakoutGame> {
 
     final shape = CircleShape()..radius = radius;
 
-    final fixtureDef = FixtureDef(shape);
+    final fixtureDef = FixtureDef(shape)
+      ..restitution = 1.0
+      ..density = 1.0;
 
     ball.createFixture(fixtureDef);
     return ball;

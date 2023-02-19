@@ -9,6 +9,8 @@ import 'package:flutter_breakout/break_out_game/brick_wall.dart';
 import 'package:flutter_breakout/break_out_game/paddle.dart';
 
 class BreakoutGame extends Forge2DGame with HasKeyboardHandlerComponents {
+  BreakoutGame() : super(gravity: Vector2.zero(), zoom: 20);
+
   @override
   FutureOr<void> onLoad() async {
     super.onLoad();
@@ -20,7 +22,7 @@ class BreakoutGame extends Forge2DGame with HasKeyboardHandlerComponents {
     ));
     await add(Arena());
     var ball = Ball(
-      radius: 1.0,
+      radius: 0.5,
       position: size / 2,
     );
     await add(ball);
