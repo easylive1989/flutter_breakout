@@ -1,6 +1,6 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_breakout/break_out_game/break_out_game.dart';
+import 'package:flutter_breakout/break_out_game/breakout_game.dart';
 
 void main() {
   runApp(const MyApp());
