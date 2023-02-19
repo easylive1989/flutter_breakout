@@ -1,17 +1,14 @@
 import 'dart:async';
 
-import 'package:flame/components.dart';
+import 'package:flame/events.dart';
 import 'package:flame/game.dart';
+import 'package:flutter_breakout/break_out_game/paddle.dart';
 
-class BreakOutGame extends FlameGame {
+class BreakOutGame extends FlameGame with HasKeyboardHandlerComponents {
   @override
   FutureOr<void> onLoad() {
     super.onLoad();
 
-    add(RectangleComponent(
-      position: Vector2(size.x / 2, size.y * 0.9),
-      size: Vector2(100, 20),
-      anchor: Anchor.center,
-    ));
+    add(Paddle(size));
   }
 }
