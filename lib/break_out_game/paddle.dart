@@ -1,5 +1,6 @@
 import 'package:flame/components.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_breakout/break_out_game/breakout_game.dart';
 
 enum PaddleState {
   movingRight,
@@ -7,7 +8,8 @@ enum PaddleState {
   idle,
 }
 
-class Paddle extends RectangleComponent with KeyboardHandler {
+class Paddle extends RectangleComponent
+    with KeyboardHandler, HasGameRef<BreakOutGame> {
   Paddle(Vector2 gameSize)
       : _velocity = gameSize.x / 3,
         super(
@@ -35,10 +37,13 @@ class Paddle extends RectangleComponent with KeyboardHandler {
   void update(double dt) {
     super.update(dt);
     var movingFactor = {
-      PaddleState.movingRight : 1,
+      PaddleState.movingRight: 1,
       PaddleState.movingLeft: -1,
-      PaddleState.idle : 0,
+      PaddleState.idle: 0,
     };
+
     position.x += movingFactor[_paddleState]! * _velocity * dt;
+    if (position.x > gameRef.size.x - 50) position.x = gameRef.size.x - 50;
+    if (position.x < 50) position.x = 50;
   }
 }
