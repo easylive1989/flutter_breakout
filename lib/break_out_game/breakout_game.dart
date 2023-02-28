@@ -6,10 +6,14 @@ import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flutter_breakout/break_out_game/arena.dart';
 import 'package:flutter_breakout/break_out_game/ball.dart';
 import 'package:flutter_breakout/break_out_game/brick_wall.dart';
+import 'package:flutter_breakout/break_out_game/dead_zone.dart';
+import 'package:flutter_breakout/break_out_game/game_state.dart';
 import 'package:flutter_breakout/break_out_game/paddle.dart';
 
 class BreakoutGame extends Forge2DGame with HasKeyboardHandlerComponents {
   BreakoutGame() : super(gravity: Vector2.zero(), zoom: 20);
+
+  GameState gameState = GameState.initializing;
 
   @override
   FutureOr<void> onLoad() async {
@@ -31,5 +35,10 @@ class BreakoutGame extends Forge2DGame with HasKeyboardHandlerComponents {
       position: Vector2(size.x / 2.0, size.y * 0.85),
       size: const Size(4, 0.8),
     ));
+    await add(DeadZone(
+      size: Vector2(100, size.y * 0.1),
+      position: Vector2(size.x / 2.0, size.y ),
+    ));
+    gameState = GameState.ready;
   }
 }
