@@ -1,10 +1,9 @@
 import 'package:flame/extensions.dart';
-import 'package:flame_forge2d/body_component.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
+import 'package:flutter_breakout/break_out_game/ball.dart';
 import 'package:flutter_breakout/break_out_game/breakout_game.dart';
-import 'package:forge2d/src/dynamics/body.dart';
 
-class Brick extends BodyComponent<BreakoutGame> {
+class Brick extends BodyComponent<BreakoutGame> with ContactCallbacks {
   Brick({
     required this.size,
     required this.position,
@@ -12,10 +11,19 @@ class Brick extends BodyComponent<BreakoutGame> {
 
   final Size size;
   final Vector2 position;
+  var destroy = false;
+
+  @override
+  void beginContact(Object other, Contact contact) {
+    if (other is Ball) {
+      destroy = true;
+    }
+  }
 
   @override
   Body createBody() {
     var bodyDef = BodyDef()
+      ..userData = this
       ..type = BodyType.static
       ..position = position;
 

@@ -10,6 +10,7 @@ class Ball extends BodyComponent<BreakoutGame> {
   @override
   Body createBody() {
     final bodyDef = BodyDef()
+      ..userData = this
       ..type = BodyType.dynamic
       ..position = position;
 

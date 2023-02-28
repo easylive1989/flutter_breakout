@@ -46,4 +46,19 @@ class BrickWall extends Component with HasGameRef<BreakoutGame> {
       );
     });
   }
+
+  @override
+  void update(double dt) {
+    for (final child in children) {
+      if (child is Brick && child.destroy) {
+        for (final fixture in [...child.body.fixtures]) {
+          child.body.destroyFixture(fixture);
+        }
+        gameRef.world.destroyBody(child.body);
+        remove(child);
+      }
+    }
+
+    super.update(dt);
+  }
 }
