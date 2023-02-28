@@ -31,7 +31,7 @@ class BreakoutGame extends Forge2DGame
     await add(Arena());
     await add(_ball = Ball(
       radius: 0.5,
-      position: size / 2,
+      position: Vector2(size.x / 2.0, size.y * 0.7),
     ));
     await add(_paddle = Paddle(
       position: Vector2(size.x / 2.0, size.y * 0.85),
@@ -73,6 +73,7 @@ class BreakoutGame extends Forge2DGame
     
     overlays.remove(overlays.activeOverlays.first);
     overlays.add("preGame");
+    gameState = GameState.ready;
     resumeEngine();
   }
 }

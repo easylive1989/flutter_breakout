@@ -12,21 +12,29 @@ class GameOverScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.green,
-      body: Column(
-        children: [
-          const Text(
-            "Game Over",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 24,
+      backgroundColor: Colors.black,
+      body: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              "Game Over",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 24,
+              ),
             ),
-          ),
-          ElevatedButton(
-            onPressed: game.resetGame,
-            child: const Text("Reset"),
-          ),
-        ],
+            const SizedBox(height: 10),
+            ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.grey),
+              ),
+              onPressed: game.resetGame,
+              child: const Text("Reset"),
+            ),
+          ],
+        ),
       ),
     );
   }

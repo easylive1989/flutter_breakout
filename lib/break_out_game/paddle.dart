@@ -39,7 +39,8 @@ class Paddle extends BodyComponent<BreakoutGame> with KeyboardHandler {
     };
 
     body.setTransform(
-      position..add(Vector2(movingFactor[_paddleState]! * 20 * dt, 0)),
+      Vector2.copy(body.transform.p)
+        ..add(Vector2(movingFactor[_paddleState]! * 20 * dt, 0)),
       0,
     );
     super.update(dt);
