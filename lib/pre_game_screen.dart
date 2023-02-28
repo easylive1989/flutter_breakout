@@ -5,12 +5,12 @@ class PreGameScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.indigo,
-      child: Center(
-        child: ElevatedButton(
-          onPressed: () {},
-          child: const Text("Start"),
+    return const Material(
+      child: Text(
+        'Tap Paddle to Begin',
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 24,
         ),
       ),
     );

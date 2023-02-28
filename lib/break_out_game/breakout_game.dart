@@ -10,10 +10,12 @@ import 'package:flutter_breakout/break_out_game/dead_zone.dart';
 import 'package:flutter_breakout/break_out_game/game_state.dart';
 import 'package:flutter_breakout/break_out_game/paddle.dart';
 
-class BreakoutGame extends Forge2DGame with HasKeyboardHandlerComponents {
+class BreakoutGame extends Forge2DGame
+    with HasKeyboardHandlerComponents, HasTappables {
   BreakoutGame() : super(gravity: Vector2.zero(), zoom: 20);
 
   GameState gameState = GameState.initializing;
+  late Ball _ball;
 
   @override
   FutureOr<void> onLoad() async {
@@ -25,22 +27,31 @@ class BreakoutGame extends Forge2DGame with HasKeyboardHandlerComponents {
       columns: 6,
     ));
     await add(Arena());
-    var ball = Ball(
+    _ball = Ball(
       radius: 0.5,
       position: size / 2,
     );
-    await add(ball);
-    ball.body.applyLinearImpulse(Vector2(-10, -10));
+    await add(_ball);
     await add(Paddle(
       position: Vector2(size.x / 2.0, size.y * 0.85),
       size: const Size(4, 0.8),
     ));
     await add(DeadZone(
       size: Vector2(100, size.y * 0.1),
-      position: Vector2(size.x / 2.0, size.y ),
+      position: Vector2(size.x / 2.0, size.y),
     ));
     gameState = GameState.ready;
     overlays.add("preGame");
+  }
+
+  @override
+  void onTapDown(int pointerId, TapDownInfo info) {
+    if (gameState == GameState.ready) {
+      overlays.remove('preGame');
+      _ball.body.applyLinearImpulse(Vector2(-10.0, -10.0));
+      gameState = GameState.running;
+    }
+    super.onTapDown(pointerId, info);
   }
 
   @override
