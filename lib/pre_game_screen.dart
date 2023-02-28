@@ -5,7 +5,7 @@ class PreGameScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Material(
+    return const Center(
       child: Text(
         'Tap Paddle to Begin',
         style: TextStyle(
