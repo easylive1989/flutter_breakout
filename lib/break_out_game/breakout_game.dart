@@ -40,6 +40,7 @@ class BreakoutGame extends Forge2DGame with HasKeyboardHandlerComponents {
       position: Vector2(size.x / 2.0, size.y ),
     ));
     gameState = GameState.ready;
+    overlays.add("preGame");
   }
 
   @override

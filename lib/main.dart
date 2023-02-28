@@ -1,6 +1,7 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_breakout/break_out_game/breakout_game.dart';
+import 'package:flutter_breakout/pre_game_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,6 +19,9 @@ class MyApp extends StatelessWidget {
       ),
       home: GameWidget(
         game: BreakoutGame(),
+        overlayBuilderMap: {
+          "preGame": (context, game) => PreGameScreen(),
+        },
       ),
     );
   }
