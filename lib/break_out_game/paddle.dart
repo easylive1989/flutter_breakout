@@ -1,13 +1,49 @@
 import 'dart:ui';
 
+import 'package:flame/components.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_breakout/break_out_game/breakout_game.dart';
 
-class Paddle extends BodyComponent<BreakoutGame> {
+enum PaddleState {
+  movingRight,
+  movingLeft,
+  idle,
+}
+
+class Paddle extends BodyComponent<BreakoutGame> with KeyboardHandler {
   Paddle({required this.position, required this.size});
 
   final Vector2 position;
   final Size size;
+  PaddleState _paddleState = PaddleState.idle;
+
+  @override
+  bool onKeyEvent(RawKeyEvent event, Set<LogicalKeyboardKey> keysPressed) {
+    if (keysPressed.contains(LogicalKeyboardKey.arrowRight)) {
+      _paddleState = PaddleState.movingRight;
+    } else if (keysPressed.contains(LogicalKeyboardKey.arrowLeft)) {
+      _paddleState = PaddleState.movingLeft;
+    } else {
+      _paddleState = PaddleState.idle;
+    }
+    return super.onKeyEvent(event, keysPressed);
+  }
+
+  @override
+  void update(double dt) {
+    var movingFactor = {
+      PaddleState.movingLeft: -1,
+      PaddleState.movingRight: 1,
+      PaddleState.idle: 0,
+    };
+
+    body.setTransform(
+      position..add(Vector2(movingFactor[_paddleState]! * 20 * dt, 0)),
+      0,
+    );
+    super.update(dt);
+  }
 
   @override
   Body createBody() {
