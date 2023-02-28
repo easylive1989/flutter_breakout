@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flame/components.dart';
 import 'package:flutter_breakout/break_out_game/breakout_game.dart';
 import 'package:flutter_breakout/break_out_game/brick.dart';
+import 'package:flutter_breakout/break_out_game/game_state.dart';
 
 class BrickWall extends Component with HasGameRef<BreakoutGame> {
   final Vector2 position;
@@ -49,6 +50,11 @@ class BrickWall extends Component with HasGameRef<BreakoutGame> {
 
   @override
   void update(double dt) {
+    if (children.isEmpty) {
+      gameRef.gameState = GameState.won;
+      return;
+    }
+
     for (final child in children) {
       if (child is Brick && child.destroy) {
         for (final fixture in [...child.body.fixtures]) {

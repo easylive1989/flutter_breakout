@@ -25,7 +25,9 @@ class DeadZone extends BodyComponent<BreakoutGame> with ContactCallbacks {
 
   @override
   Body createBody() {
-    var bodyDef = BodyDef()..position = position;
+    var bodyDef = BodyDef()
+      ..userData = this
+      ..position = position;
 
     var zoneBody = world.createBody(bodyDef);
 

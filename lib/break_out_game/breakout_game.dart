@@ -41,4 +41,12 @@ class BreakoutGame extends Forge2DGame with HasKeyboardHandlerComponents {
     ));
     gameState = GameState.ready;
   }
+
+  @override
+  void update(double dt) {
+    super.update(dt);
+    if ([GameState.won, GameState.lost].contains(gameState)) {
+      pauseEngine();
+    }
+  }
 }
