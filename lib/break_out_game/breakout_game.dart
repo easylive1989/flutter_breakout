@@ -47,7 +47,7 @@ class BreakoutGame extends Forge2DGame
   @override
   void onTapDown(int pointerId, TapDownInfo info) {
     if (gameState == GameState.ready) {
-      overlays.remove('preGame');
+      overlays.remove("preGame");
       _ball.body.applyLinearImpulse(Vector2(-10.0, -10.0));
       gameState = GameState.running;
     }
@@ -59,6 +59,7 @@ class BreakoutGame extends Forge2DGame
     super.update(dt);
     if ([GameState.won, GameState.lost].contains(gameState)) {
       pauseEngine();
+      overlays.add("gameOver");
     }
   }
 }
