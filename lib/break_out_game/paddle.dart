@@ -65,4 +65,8 @@ class Paddle extends BodyComponent<BreakoutGame> with KeyboardHandler {
 
     return paddleBody;
   }
+
+  void reset() {
+    body.setTransform(position, 0);
+  }
 }

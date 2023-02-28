@@ -25,4 +25,9 @@ class Ball extends BodyComponent<BreakoutGame> {
     ball.createFixture(fixtureDef);
     return ball;
   }
+
+  void reset() {
+    body.setTransform(position, 0);
+    body.linearVelocity = Vector2.zero();
+  }
 }

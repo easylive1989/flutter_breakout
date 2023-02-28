@@ -16,23 +16,24 @@ class BreakoutGame extends Forge2DGame
 
   GameState gameState = GameState.initializing;
   late Ball _ball;
+  late Paddle _paddle;
+  late BrickWall _brickWall;
 
   @override
   FutureOr<void> onLoad() async {
     super.onLoad();
 
-    await add(BrickWall(
+    await add(_brickWall = BrickWall(
       position: Vector2(0.0, size.y * 0.075),
       rows: 8,
       columns: 6,
     ));
     await add(Arena());
-    _ball = Ball(
+    await add(_ball = Ball(
       radius: 0.5,
       position: size / 2,
-    );
-    await add(_ball);
-    await add(Paddle(
+    ));
+    await add(_paddle = Paddle(
       position: Vector2(size.x / 2.0, size.y * 0.85),
       size: const Size(4, 0.8),
     ));
@@ -61,5 +62,17 @@ class BreakoutGame extends Forge2DGame
       pauseEngine();
       overlays.add("gameOver");
     }
+  }
+
+  void resetGame() {
+    gameState = GameState.initializing;
+
+    _brickWall.reset();
+    _ball.reset();
+    _paddle.reset();
+    
+    overlays.remove(overlays.activeOverlays.first);
+    overlays.add("preGame");
+    resumeEngine();
   }
 }

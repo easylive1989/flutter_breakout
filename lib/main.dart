@@ -18,11 +18,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: GameWidget(
+      home: GameWidget<BreakoutGame>(
         game: BreakoutGame(),
         overlayBuilderMap: {
           "preGame": (context, game) => const PreGameScreen(),
-          "gameOver": (context, game) => const GameOverScreen()
+          "gameOver": (context, game) => GameOverScreen(game: game)
         },
       ),
     );

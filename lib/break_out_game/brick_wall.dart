@@ -19,7 +19,9 @@ class BrickWall extends Component with HasGameRef<BreakoutGame> {
   double gap = 1;
 
   @override
-  Future<void> onLoad() async {
+  Future<void> onLoad() async => _generateBricks();
+
+  void _generateBricks() {
     final wallSize = Size(gameRef.size.x, gameRef.size.y * 0.25);
 
     final brickSize = Size(
@@ -66,5 +68,10 @@ class BrickWall extends Component with HasGameRef<BreakoutGame> {
     }
 
     super.update(dt);
+  }
+
+  void reset() async {
+    removeAll(children);
+    _generateBricks();
   }
 }
