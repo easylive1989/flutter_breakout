@@ -12,7 +12,10 @@ class DeadZone extends BodyComponent<BreakoutGame> with ContactCallbacks {
   final Vector2 position;
   final Vector2 size;
 
-@override
+  @override
+  bool get renderBody => false;
+
+  @override
   void beginContact(Object other, Contact contact) {
     super.beginContact(other, contact);
     if (other is Ball) {
