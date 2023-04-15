@@ -3,6 +3,8 @@ import 'dart:ui';
 
 import 'package:flame/events.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_breakout/break_out_game/arena.dart';
 import 'package:flutter_breakout/break_out_game/ball.dart';
 import 'package:flutter_breakout/break_out_game/brick_wall.dart';
@@ -46,6 +48,19 @@ class BreakoutGame extends Forge2DGame
   }
 
   @override
+  KeyEventResult onKeyEvent(
+      RawKeyEvent event, Set<LogicalKeyboardKey> keysPressed) {
+    if (keysPressed.contains(LogicalKeyboardKey.space)) {
+      if (gameState == GameState.ready) {
+        overlays.remove("preGame");
+        _ball.body.applyLinearImpulse(Vector2(-10.0, -10.0));
+        gameState = GameState.running;
+      }
+    }
+    return super.onKeyEvent(event, keysPressed);
+  }
+
+  @override
   void onTapDown(int pointerId, TapDownInfo info) {
     if (gameState == GameState.ready) {
       overlays.remove("preGame");
@@ -70,7 +85,7 @@ class BreakoutGame extends Forge2DGame
     _brickWall.reset();
     _ball.reset();
     _paddle.reset();
-    
+
     overlays.remove(overlays.activeOverlays.first);
     overlays.add("preGame");
     gameState = GameState.ready;

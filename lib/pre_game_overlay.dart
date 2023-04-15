@@ -7,7 +7,7 @@ class PreGameOverlay extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Center(
       child: Text(
-        "Tap Paddle to Begin",
+        "Press space to Begin",
         style: TextStyle(
           color: Colors.white,
           fontSize: 24,
